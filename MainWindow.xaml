@@ -9,6 +9,9 @@
         mc:Ignorable="d"
         Title="Тренажёр времени" Height="600" Width="350"
         WindowStartupLocation="CenterScreen">
+    <Window.InputBindings>
+        <KeyBinding Key="F1" Command="{Binding ShowHelpCommand}" />
+    </Window.InputBindings>
     <Window.DataContext>
     <viewModels:MainViewModel />
     </Window.DataContext>
@@ -19,7 +22,7 @@
             <!-- Кастомные часы -->
             <controls:ClockControl Hour="{Binding Clock.Hour}" Minute="{Binding Clock.Minute}" Margin="0,10"/>
             <!-- Цифровое время -->
-            <TextBlock Text="{Binding ClockTimeString}" FontSize="36" FontWeight="Bold" HorizontalAlignment="Center" Margin="0,10"/>
+            <TextBlock Text="{Binding DisplayedTime}" FontSize="36" FontWeight="Bold" HorizontalAlignment="Center" Margin="0,10"/>
             <!-- Ввод времени -->
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                 <TextBox Width="40" Text="{Binding UserHour, UpdateSourceTrigger=PropertyChanged}" MaxLength="2" FontSize="20" HorizontalContentAlignment="Center" Margin="0,0,5,0"/>

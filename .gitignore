@@ -1,0 +1,10 @@
+# Ignore build outputs
+bin/
+obj/
+# Visual Studio settings
+*.user
+*.suo
+
+# Mac vs code etc
+.vs/
+
