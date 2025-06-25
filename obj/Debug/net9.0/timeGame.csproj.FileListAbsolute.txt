@@ -1,0 +1,8 @@
+D:\timeGame\timeGame\obj\Debug\net9.0\timeGame.GeneratedMSBuildEditorConfig.editorconfig
+D:\timeGame\timeGame\obj\Debug\net9.0\timeGame.AssemblyInfoInputs.cache
+D:\timeGame\timeGame\obj\Debug\net9.0\timeGame.AssemblyInfo.cs
+D:\timeGame\timeGame\obj\Debug\net9.0\timeGame.csproj.CoreCompileInputs.cache
+D:\timeGameOclock\obj\Debug\net9.0\timeGame.GeneratedMSBuildEditorConfig.editorconfig
+D:\timeGameOclock\obj\Debug\net9.0\timeGame.AssemblyInfoInputs.cache
+D:\timeGameOclock\obj\Debug\net9.0\timeGame.AssemblyInfo.cs
+D:\timeGameOclock\obj\Debug\net9.0\timeGame.csproj.CoreCompileInputs.cache

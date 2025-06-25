@@ -1,0 +1,38 @@
+<Window x:Class="TimeTrainer.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TimeTrainer"
+        xmlns:controls="clr-namespace:TimeTrainer.Controls"
+        xmlns:viewModels="clr-namespace:TimeTrainer.ViewModels"
+        mc:Ignorable="d"
+        Title="Тренажёр времени" Height="600" Width="350"
+        WindowStartupLocation="CenterScreen">
+    <Window.DataContext>
+    <viewModels:MainViewModel />
+    </Window.DataContext>
+    <Grid Background="{Binding Settings.BackgroundColor}">
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="20">
+            <!-- Прогрессбар -->
+            <ProgressBar Value="{Binding Session.Score}" Maximum="10" Height="10" Margin="0,10"/>
+            <!-- Кастомные часы -->
+            <controls:ClockControl Hour="{Binding Clock.Hour}" Minute="{Binding Clock.Minute}" Margin="0,10"/>
+            <!-- Цифровое время -->
+            <TextBlock Text="{Binding ClockTimeString}" FontSize="36" FontWeight="Bold" HorizontalAlignment="Center" Margin="0,10"/>
+            <!-- Ввод времени -->
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <TextBox Width="40" Text="{Binding UserHour, UpdateSourceTrigger=PropertyChanged}" MaxLength="2" FontSize="20" HorizontalContentAlignment="Center" Margin="0,0,5,0"/>
+                <TextBlock Text=":" FontSize="20" VerticalAlignment="Center"/>
+                <TextBox Width="40" Text="{Binding UserMinute, UpdateSourceTrigger=PropertyChanged}" MaxLength="2" FontSize="20" HorizontalContentAlignment="Center" Margin="5,0,0,0"/>
+            </StackPanel>
+            <!-- Кнопка Проверить -->
+            <Button Content="ПРОВЕРИТЬ" Command="{Binding CheckCommand}" Height="40" FontSize="18" Background="#4CAF50" Foreground="White" Margin="0,10"/>
+            <!-- Кнопки Настройки и Помощь -->
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <Button Content="Настройки" Command="{Binding OpenSettingsCommand}" Margin="0,0,10,0"/>
+                <Button Content="?" Command="{Binding ShowHelpCommand}" ToolTip="F1 — помощь"/>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Window> 
