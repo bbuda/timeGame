@@ -7,7 +7,8 @@ namespace TimeTrainer.ViewModels
     public class MainViewModel : INotifyPropertyChanged
     {
         public ClockModel Clock { get; set; } = new();
-        public SettingsModel Settings { get; set; } = new();
+        public SettingsModel Settings { get; set; }
+            = SettingsService.Load();
         public GameSessionModel Session { get; set; } = new();
 
         private string userHour;
@@ -23,7 +24,15 @@ namespace TimeTrainer.ViewModels
             set { userMinute = value; OnPropertyChanged(nameof(UserMinute)); }
         }
 
+        private bool showAnswer;
+        public bool ShowAnswer
+        {
+            get => showAnswer;
+            set { showAnswer = value; OnPropertyChanged(nameof(ShowAnswer)); OnPropertyChanged(nameof(DisplayedTime)); }
+        }
+
         public string ClockTimeString => $"{Clock.Hour:D2}:{Clock.Minute:D2}";
+        public string DisplayedTime => ShowAnswer ? ClockTimeString : "??:??";
 
         public ICommand CheckCommand { get; }
         public ICommand OpenSettingsCommand { get; }
@@ -35,6 +44,8 @@ namespace TimeTrainer.ViewModels
             OpenSettingsCommand = new RelayCommand(_ => OpenSettings());
             ShowHelpCommand = new RelayCommand(_ => ShowHelp());
             Clock.SetRandomTime();
+            ShowAnswer = Settings.Mode == "training";
+            OnPropertyChanged(nameof(DisplayedTime));
         }
 
         private void CheckTime()
@@ -44,11 +55,22 @@ namespace TimeTrainer.ViewModels
                 bool correct = Clock.IsTimeEqual(h, m);
                 // Здесь можно добавить обработку результата (увеличить счет, уменьшить жизни и т.д.)
             }
+            ShowAnswer = true;
             OnPropertyChanged(nameof(ClockTimeString));
         }
 
-        private void OpenSettings() { /* Открыть окно настроек */ }
-        private void ShowHelp() { /* Открыть окно помощи */ }
+        private void OpenSettings()
+        {
+            Settings.Mode = Settings.Mode == "training" ? "quiz" : "training";
+            SettingsService.Save(Settings);
+            ShowAnswer = Settings.Mode == "training";
+        }
+        private void ShowHelp()
+        {
+            System.Windows.MessageBox.Show(
+                "F1 - помощь\nEnter - проверить время",
+                "Помощь");
+        }
 
         public event PropertyChangedEventHandler PropertyChanged;
         protected void OnPropertyChanged(string name)
